@@ -1,16 +1,16 @@
 import './style.css'
 import logo from '../../assets/logoPequena.png'
 
-export default function Login(){
+export default function SignUp(){
     return (
-        <div className="loginContainer">
-            <section className="loginSection">
-                <img src={logo} alt="logo" className='logoLogin' />
-                <h1>Login</h1>
+        <div className="signupContainer">
+            <section className="signupSection">
+                <img src={logo} alt="logo" className='logosignup' />
+                <h1>Criar conta</h1>
                 <form action="">
                     <input type="text" placeholder='Digite seu usuário' />
                     <input type="password" placeholder='Digite sua senha' />
-                    <button className='buttonLogin'>Entrar</button>
+                    <button className='buttonsignup'>Criar</button>
                 </form>
             </section>
         </div>

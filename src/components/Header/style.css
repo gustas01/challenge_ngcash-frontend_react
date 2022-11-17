@@ -1,0 +1,21 @@
+.headerContainer{
+    color: white;
+    font-size: 1.2rem;
+    box-shadow: 5px 5px 5px black;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* gap: 35px; */
+    height: 90px;
+    padding: 15px 15px;
+    font-weight: 700;
+    justify-content: space-around;
+}
+
+.headerContainer a{
+    color: white;
+}
+
+.iconLogoNavBar{
+    height: 78px;
+}

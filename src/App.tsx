@@ -1,11 +1,11 @@
 import './App.css';
-import Login from './components/Login';
+// import BasicTabs from './components/BasicTabs';
 import Home from './templates/Home';
 
 function App(): JSX.Element {
   return (
     <div className='container'>
-      <Login/>
+      <Home/>
     </div>
   );
 }
