@@ -33,7 +33,7 @@ export default function Transactions(props: IToken): JSX.Element{
   }
 
   function handleGetDate(event: React.ChangeEvent<HTMLInputElement>){     
-    setFilterdate(new Date(event.target.value).toLocaleDateString('pt-BR', {timeZone: 'UTC'}))
+    setFilterdate((event.target.value).toString().replaceAll('-', '/'))
   }
 
 
