@@ -4,12 +4,11 @@ import { Input } from '@mui/material'
 import { useState } from 'react'
 import { toast} from 'react-toastify'
 import constants from '../../utils/contants'
-import { useNavigate } from 'react-router-dom'
+import { AiOutlineUserAdd } from "react-icons/ai";
+import { RiLockPasswordLine } from 'react-icons/ri'
 
 
 export default function SignUp(){
-  const navigate = useNavigate()
-
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
 
@@ -43,8 +42,8 @@ export default function SignUp(){
         throw new Error(data.errors)
       
       toast.success('Usuário criado com sucesso!')
-    }catch(error){
-      toast.error(`${error}`)
+    }catch(error: any){
+      toast.error(`${error.toString().slice(7)}`)
     }
   }
 
@@ -54,8 +53,14 @@ export default function SignUp(){
                 <img src={logo} alt="logo" className='logoSignup' />
                 <h1>Criar conta</h1>
                 <form action="">
-                    <Input type="text" placeholder='Digite seu usuário' required onChange={handleGetUserName}/>
-                    <Input type="password" placeholder='Digite sua senha' required onChange={handleGetPassword}/>
+                  <span>
+                    <AiOutlineUserAdd/>
+                    <Input className='inputLogin' type="text" placeholder='Digite seu usuário' required onChange={handleGetUserName}/>
+                  </span>
+                  <span>
+                    <RiLockPasswordLine/>
+                    <Input className='inputLogin' type="password" placeholder='Digite sua senha' required onChange={handleGetPassword}/>
+                  </span>
                     <button className='buttonForm' onClick={e => handleSignUp(e)}>Criar</button>
                 </form>
             </section>

@@ -38,13 +38,22 @@
     gap: 30px;
 }
 
-.loginSection input{
-    color: var(--text-color-input);
-    background-color: var(--backgroung-color-input);
-    font-size: 1.2rem;
-    padding: 3px;
-    width: 100%;
-    border-radius: 5px;
+.loginSection span{
+  background-color: var(--backgroung-color-input);
+  font-size: 1.2rem;
+  padding: 3px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.inputLogin{
+  flex: 1;
+}
+
+.inputLogin input{
+  color: var(--text-color-input);
+  padding-left: 5px;
 }
 
 .loginSection input::placeholder{

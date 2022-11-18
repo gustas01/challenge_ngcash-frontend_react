@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { toast} from 'react-toastify'
 import constants from '../../utils/contants'
+import { AiOutlineUser } from "react-icons/ai";
+import { RiLockPasswordLine } from 'react-icons/ri'
 
 export default function Login(){
   const navigate = useNavigate()
@@ -46,8 +48,8 @@ export default function Login(){
        
       localStorage.setItem('token', data.token)   
       navigate('/home', { state: data.token })
-    }catch(error){
-      toast.error(`${error}`)
+    }catch(error: any){
+      toast.error(`${error.toString().slice(7)}`)
     }
   }
 
@@ -57,8 +59,14 @@ export default function Login(){
             <img src={logo} alt="logo" className='logoLogin' />
             <h1>Login</h1>
             <form action="">
-              <Input type="text" placeholder='Digite seu usuário' required onChange={handleGetUserName}/>
-              <Input type="password" placeholder='Digite sua senha' required onChange={handleGetPassword}/>
+              <span>
+                <AiOutlineUser/>
+                <Input className='inputLogin' type="text" placeholder='Digite seu usuário' required onChange={handleGetUserName}/>
+              </span>
+              <span>
+                <RiLockPasswordLine/>
+                <Input className='inputLogin' type="password" placeholder='Digite sua senha' required onChange={handleGetPassword}/>
+              </span>
               <button className='buttonForm' onClick={e => handleLogin(e)}>Entrar</button>
             </form>
           </section>

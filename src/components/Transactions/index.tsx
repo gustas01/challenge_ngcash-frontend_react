@@ -39,8 +39,8 @@ export default function Transactions(props: IToken): JSX.Element{
 
     try{
       getTransactions()
-    }catch(error){
-      toast.error(`${error}`)
+    }catch(error: any){
+      toast.error(`${error.toString().slice(7)}`)
     }
   }, [props.token])
 
