@@ -11,14 +11,20 @@
   min-width: 350px;
 }
 
-.filterField, .filtercash{
+.filterField form, .filtercash{
   display: flex;
   flex-direction: column;
   width: fit-content;
   gap: 20px;
 }
 
-.filterButton{
+.filterFormButtons{
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+}
+
+.filterButton, .resetButton{
   padding: 5px;
   background-color: #262626;
   color: white;
@@ -27,7 +33,20 @@
   border-radius: 5px;
 }
 
+.filterButton{
+  flex: 1;
+  /* padding: 10px; */
+}
+
 .filterButton:hover{
   background-color: #202020;
   cursor: pointer;
+}
+
+.resetButton{
+  background-color: rgba(255, 0, 0, 0.466);
+}
+
+.resetButton:hover{
+  background-color: rgba(255, 0, 0, 0.336);
 }

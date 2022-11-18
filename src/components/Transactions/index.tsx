@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import constants from '../../utils/contants'
 import './style.css'
+
 
 interface ITransactions {
   id: Number,
@@ -19,8 +20,52 @@ interface IToken {
 export default function Transactions(props: IToken): JSX.Element{
   const [transactions, setTransactions] = useState<[ITransactions]>()
 
-  useEffect(() => {
-    async function getTransactions(){
+  const [filterdate, setFilterdate] = useState<String>('')
+  const [filtercashout, setFiltercashout] = useState(false)
+  const [filtercashin, setFiltercashin] = useState(false)
+
+  function handleGetCashout(event: React.ChangeEvent<HTMLInputElement>){
+    setFiltercashout(event.target.checked)
+  }
+
+  function handleGetCashin(event: React.ChangeEvent<HTMLInputElement>){    
+    setFiltercashin(event.target.checked)
+  }
+
+  function handleGetDate(event: React.ChangeEvent<HTMLInputElement>){     
+    setFilterdate(new Date(event.target.value).toLocaleDateString('pt-BR', {timeZone: 'UTC'}))
+  }
+
+
+  async function handleFilter(event: React.MouseEvent){
+    event.preventDefault()
+    try{
+      let datefilterString = ''
+      
+      if(filterdate.toString() !== 'Invalid Date')        
+        datefilterString = `&filterdate=${filterdate}`
+      
+      const response = await fetch(`${constants.baseURL}/transactions?filtercashout=${filtercashout}&filtercashin=${filtercashin}${datefilterString}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${props.token}`
+        },
+      })
+
+      const data = await response.json()
+
+      if(data.errors)
+        throw new Error(data.errors)
+
+      setTransactions(data)
+
+    }catch(error: any){
+      toast.error(`${error.toString().slice(7)}`)
+    }
+  }
+
+  const getTransactions = useCallback(async () => {
       const response = await fetch(`${constants.baseURL}/transactions`, {
         method: 'GET',
         headers: {
@@ -30,23 +75,36 @@ export default function Transactions(props: IToken): JSX.Element{
       })
       
       const data = await response.json()
-
+  
       if(data.errors)
         throw new Error(data.errors)
-
+  
       setTransactions(data)
-    }
+    
+  }, [props.token]) 
 
+  function handleClearForm(){
+    try{
+      setFiltercashin(false)
+      setFiltercashout(false)
+      setFilterdate('')
+      getTransactions()
+    }catch(error: any){
+      toast.error(`${error.toString().slice(7)}`)
+    }
+  }
+
+  useEffect(() => {
     try{
       getTransactions()
     }catch(error: any){
       toast.error(`${error.toString().slice(7)}`)
     }
-  }, [props.token])
+  }, [props.token, getTransactions])
 
   return(
     <section className="transactionsContainer">
-      {!!transactions?.length && 
+      
       <table border={1}>
         <thead>
           <tr>
@@ -57,7 +115,7 @@ export default function Transactions(props: IToken): JSX.Element{
           </tr>
         </thead>
         <tbody>
-          {transactions.map(el => 
+          {transactions?.map(el => 
           <tr key={`${el.created_at}`}>
             <td>
               {`${el.value}`}
@@ -75,21 +133,26 @@ export default function Transactions(props: IToken): JSX.Element{
             )} 
         </tbody>
       </table>
-      }
+      
        <div className="filterField">
-          <input type="date" name="filterdate" id="" />
+        <form action="">
+          <input onSelect={handleGetDate} type="date" name="filterdate" id="" />
           <div className="filtercash">
             <span>
-              <input type="checkbox" name="cashout" id="filtercashout" />
+              <input onChange={handleGetCashout} checked={filtercashout} type="checkbox" name="cashout" id="filtercashout" />
               <label htmlFor="filtercashout">Cash-Out</label>
             </span>
             <span>
-              <input type="checkbox" name="cashin" id="filtercashin" />
+              <input onChange={handleGetCashin} checked={filtercashin} type="checkbox" name="cashin" id="filtercashin" />
               <label htmlFor="filtercashin">Cash-In</label>
             </span>
           </div>
 
-          <button className='filterButton'>Filtrar</button>
+          <span className='filterFormButtons'>
+            <button className='filterButton' onClick={e => handleFilter(e)}>Filtrar</button>
+            <button type='reset' className='resetButton' onClick={handleClearForm}>Limpar</button>
+          </span>
+        </form>
         </div>
     </section>
   )
