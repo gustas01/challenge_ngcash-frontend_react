@@ -1,11 +1,16 @@
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import BasicTabs from './components/BasicTabs';
-// import Home from './templates/Home';
+import MyRoutes from './Routes';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App(): JSX.Element {
   return (
     <div className='container'>
-      <BasicTabs/>
+      <BrowserRouter>
+        <MyRoutes/>
+        <ToastContainer position='top-right' autoClose={3000} className='toast-container'/>
+      </BrowserRouter>
     </div>
   );
 }
