@@ -8,7 +8,7 @@ export default function Home(): JSX.Element{
     return(
         <main className="homeContainer">
           <Header token={state}/>
-          <Navbar/>
+          <Navbar token={state}/>
         </main>
     )
 }

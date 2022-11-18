@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Transactions from '../Transactions';
 import CashOut from '../CashOut';
+import { useLocation } from 'react-router-dom'
 
 
 interface TabPanelProps {
@@ -41,7 +42,8 @@ function a11yProps(index: number) {
   };
 }
 
-export default function Navbar() {
+export default function Navbar(props: {token: String}) {
+  const {state} = useLocation()
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -64,7 +66,7 @@ export default function Navbar() {
         <Tab label="Transferências" {...a11yProps(1)} sx={{color: 'white'}}/>
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Transactions/>
+        <Transactions token={state}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CashOut/>

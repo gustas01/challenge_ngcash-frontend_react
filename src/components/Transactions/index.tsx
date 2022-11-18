@@ -1,17 +1,52 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import constants from '../../utils/contants'
 import './style.css'
 
-export default function Transactions(): JSX.Element{
-  const [transactions, setTransactions] = useState(new Array(10).fill({
-    value: 1000,
-    debited_account_id: 5,
-    credited_account_id: 7,
-    created_at: "2022-11-17T01:27:42.534Z"
-  }))
+interface ITransactions {
+  id: Number,
+  value: Number,
+  debited_account_id: Number,
+  credited_account_id: Number
+  created_at: String,
+  updated_at: String,
+}
+
+interface IToken {
+  token: String
+}
+
+export default function Transactions(props: IToken): JSX.Element{
+  const [transactions, setTransactions] = useState<[ITransactions]>()
+
+  useEffect(() => {
+    async function getTransactions(){
+      const response = await fetch(`${constants.baseURL}/transactions`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${props.token}`
+        },
+      })
+      
+      const data = await response.json()
+
+      if(data.errors)
+        throw new Error(data.errors)
+
+      setTransactions(data)
+    }
+
+    try{
+      getTransactions()
+    }catch(error){
+      toast.error(`${error}`)
+    }
+  }, [props.token])
 
   return(
     <section className="transactionsContainer">
-      {!!transactions.length && 
+      {!!transactions?.length && 
       <table border={1}>
         <thead>
           <tr>
@@ -23,18 +58,18 @@ export default function Transactions(): JSX.Element{
         </thead>
         <tbody>
           {transactions.map(el => 
-          <tr key={el.created_at}>
+          <tr key={`${el.created_at}`}>
             <td>
-              {el.value}
+              {`${el.value}`}
             </td>
             <td>
-              {el.debited_account_id}
+              {`${el.debited_account_id}`}
             </td>
             <td>
-              {el.credited_account_id}
+              {`${el.credited_account_id}`}
             </td>
             <td>
-              {new Date(el.created_at).toLocaleDateString('pt-BR')}
+              {new Date(`${el.created_at}`).toLocaleDateString('pt-BR')}
             </td>
           </tr>
             )} 

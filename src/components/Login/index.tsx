@@ -44,7 +44,7 @@ export default function Login(){
         throw new Error(data.errors)
       
        
-      localStorage.setItem('token', JSON.stringify(data.token))   
+      localStorage.setItem('token', data.token)   
       navigate('/home', { state: data.token })
     }catch(error){
       toast.error(`${error}`)

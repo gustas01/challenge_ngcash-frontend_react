@@ -1,9 +1,10 @@
 import logo from '../../assets/logoPequena.png'
 import './style.css'
 import { useNavigate } from 'react-router-dom'
-import { SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import jwt_decode from "jwt-decode";
 import constants from '../../utils/contants'
+import { toast } from 'react-toastify';
 
 interface IToken{
   token: string
@@ -40,24 +41,37 @@ export default function Header(props: IToken){
   useEffect(() => {
     const decoded: IUser = jwt_decode(props.token)
     setUserName(decoded.user_name)    
-
-    async function getBalance(){
-      const response = await fetch(`${constants.baseURL}/accounts`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${props.token}`
-        },
-
-      })
-
-      const data: IBalance = await response.json()
-      setBalance(data.balance)
-    }
     
-    getBalance()
+    async function getBalance(){
+    const response = await fetch(`${constants.baseURL}/accounts`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${props.token}`
+      },
+    })
 
-  }, [props.token])
+    if(response.status === 401){
+      toast.error("Token expirado ou inválido")
+      navigate('/')
+    }
+
+    const data: IBalance = await response.json()
+    setBalance(data.balance)
+    }
+
+    try{
+      //verificando se o token está expirado
+      if(decoded.exp <= Math.floor(Date.now() / 1000)){
+        localStorage.removeItem('token')
+        toast.error("Token expirado")
+        navigate('/')
+      }else
+        getBalance()
+    }catch(error){
+      toast.error(`${error}`)
+    } 
+  }, [props.token, balance, navigate])
 
     return(
         <header className="headerContainer">
