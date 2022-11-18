@@ -1,5 +1,6 @@
 import './style.css'
 import logo from '../../assets/logoPequena.png'
+import { Input } from '@mui/material'
 
 export default function SignUp(){
     return (
@@ -8,9 +9,9 @@ export default function SignUp(){
                 <img src={logo} alt="logo" className='logosignup' />
                 <h1>Criar conta</h1>
                 <form action="">
-                    <input type="text" placeholder='Digite seu usuário' />
-                    <input type="password" placeholder='Digite sua senha' />
-                    <button className='buttonsignup'>Criar</button>
+                    <Input type="text" placeholder='Digite seu usuário' required/>
+                    <Input type="password" placeholder='Digite sua senha' required/>
+                    <button className='buttonForm'>Criar</button>
                 </form>
             </section>
         </div>

@@ -1,4 +1,3 @@
-import { RadioGroup } from '@mui/material'
 import { useState } from 'react'
 import './style.css'
 
@@ -14,14 +13,17 @@ export default function Transactions(): JSX.Element{
     <section className="transactionsContainer">
       {!!transactions.length && 
       <table border={1}>
-        <tr>
-          <td>Valor (R$)</td>
-          <td>Conta do débito</td>
-          <td>Conta do crédito</td>
-          <td>Data</td>
-        </tr>
-        {transactions.map(el => 
+        <thead>
           <tr>
+            <td>Valor (R$)</td>
+            <td>Conta do débito</td>
+            <td>Conta do crédito</td>
+            <td>Data</td>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.map(el => 
+          <tr key={el.created_at}>
             <td>
               {el.value}
             </td>
@@ -35,7 +37,8 @@ export default function Transactions(): JSX.Element{
               {new Date(el.created_at).toLocaleDateString('pt-BR')}
             </td>
           </tr>
-          )} 
+            )} 
+        </tbody>
       </table>
       }
        <div className="filterField">

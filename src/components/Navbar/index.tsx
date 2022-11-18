@@ -4,6 +4,8 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Transactions from '../Transactions';
+import CashOut from '../CashOut';
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -25,7 +27,7 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component={'div'}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -65,7 +67,7 @@ export default function Navbar() {
         <Transactions/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Transferências
+        <CashOut/>
       </TabPanel>
     </Box>
   );

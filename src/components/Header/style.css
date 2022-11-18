@@ -19,3 +19,7 @@
 .iconLogoNavBar{
     height: 78px;
 }
+
+.headerContainer button{
+  background-color: transparent;
+}

@@ -1,0 +1,11 @@
+.cashOutContainer{
+  width: 30%;
+  min-width: 300px;
+}
+
+.cashOutForm{
+  display: flex;
+  flex-direction: column;
+  color: white;
+  gap: 30px;
+}

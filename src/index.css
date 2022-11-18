@@ -27,3 +27,17 @@ body {
 #root {
   height: 100vh;
 }
+
+.buttonForm{
+  padding: 5px;
+  background-color: #262626;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 5px;
+}
+
+.buttonForm:hover{
+  background-color: #202020;
+  cursor: pointer;
+}

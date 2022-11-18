@@ -9,12 +9,12 @@ export default function Header(){
                     <img src={logo} alt="" className="iconLogoNavBar"/>
                 </a>
             </span>
-            <span>
-                <a href="https://ng.cash/">Conheça a NG.CA$H</a>
+            <a href="https://ng.cash/">Conheça a NG.CA$H</a>
+            <span style={{display: 'flex', flexDirection: 'column'}}>
+                <p>Bem-vindo, UsuárioLogado!</p>
+                <p>Balance: R$ 123,00</p>
             </span>
-            <span>
-                Bem-vindo, UsuárioLogado!
-            </span>
+                <button className='buttonForm'>Sair</button>
         </header>
     )
 }
