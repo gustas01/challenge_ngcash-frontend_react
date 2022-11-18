@@ -26,7 +26,7 @@ E com validações tanto na hora de entrar quando na de criar uma conta
 E para criar conta basta entrar com userName e password, e caso passe nas validações da API, o usuário será criado e uma mensagem será exibida. <br>
 ![validationPasswordSuccess](https://user-images.githubusercontent.com/50846424/202816905-3ce9aedc-21f1-416a-b77c-7fed1248a52c.PNG)
 
-Depois de logado, será apresentada para o usuário a home, que contém a tabela com todas as transações em que ele participou.<br>
+Depois de logado, será apresentada para o usuário a home, que contém a tabela com todas as transações em que ele participou. E no cabeço já temos informações como o nome do usuário e seu balance (saldo) atual. Assim também como uma opção de fazer logou (Sair).<br>
 
 ![transactions](https://user-images.githubusercontent.com/50846424/202817028-6bfc2279-36fd-45fb-a23f-497c44edb132.PNG)
 
