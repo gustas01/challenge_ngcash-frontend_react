@@ -3,8 +3,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Login from '../Login';
-import SignUp from '../SignUp';
+import Login from '../../components/Login';
+import SignUp from '../../components/SignUp';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -39,7 +39,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs(): JSX.Element {
+export default function LoginSignUp(): JSX.Element {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

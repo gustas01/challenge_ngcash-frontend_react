@@ -8,7 +8,7 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import { RiLockPasswordLine } from 'react-icons/ri'
 
 
-export default function SignUp(){
+export default function SignUp(): JSX.Element{
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
 

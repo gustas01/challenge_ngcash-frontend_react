@@ -8,7 +8,7 @@ import constants from '../../utils/contants'
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLockPasswordLine } from 'react-icons/ri'
 
-export default function Login(){
+export default function Login(): JSX.Element{
   const navigate = useNavigate()
 
   const [userName, setUserName] = useState('')

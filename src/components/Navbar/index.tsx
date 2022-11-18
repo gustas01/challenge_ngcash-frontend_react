@@ -42,7 +42,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function Navbar(props: {token: String}) {
+export default function Navbar(props: {token: String}): JSX.Element {
   const {state} = useLocation()
   const [value, setValue] = React.useState(0);
 
@@ -69,7 +69,7 @@ export default function Navbar(props: {token: String}) {
         <Transactions token={state}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <CashOut/>
+        <CashOut token={state}/>
       </TabPanel>
     </Box>
   );

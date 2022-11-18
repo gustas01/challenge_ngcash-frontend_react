@@ -22,7 +22,7 @@ interface IBalance {
   balance: Number
 }
 
-export default function Header(props: IToken){
+export default function Header(props: IToken): JSX.Element{
   const navigate = useNavigate()
 
   const [userName, setUserName] = useState<String>('')
@@ -80,10 +80,10 @@ export default function Header(props: IToken){
             </span>
             <a href="https://ng.cash/">Conheça a NG.CA$H</a>
             <span style={{display: 'flex', flexDirection: 'column'}}>
-                <p>Bem-vindo, {userName}</p>
-                <p>{`Balance: R$ ${balance}`}</p>
+              <p>Bem-vindo, {userName}</p>
+              <p>{`Balance: R$ ${balance}`}</p>
             </span>
-                <button className='buttonForm' onClick={logout}>Sair</button>
+              <button className='buttonForm' onClick={logout}>Sair</button>
         </header>
     )
 }
