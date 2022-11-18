@@ -9,7 +9,6 @@ import constants from '../../utils/contants'
 export default function Login(){
   const navigate = useNavigate()
 
-  const [token, setToken] = useState('')
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
 
@@ -44,8 +43,9 @@ export default function Login(){
       if(data.errors)
         throw new Error(data.errors)
       
-      setToken(data.token)      
-      navigate('/home', { state: token })
+       
+      localStorage.setItem('token', JSON.stringify(data.token))   
+      navigate('/home', { state: data.token })
     }catch(error){
       toast.error(`${error}`)
     }
